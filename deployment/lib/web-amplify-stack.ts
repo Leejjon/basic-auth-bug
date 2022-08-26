@@ -147,11 +147,11 @@ export class WebAmplifyStack extends Stack {
       iamServiceRole: amplifyRole.roleArn,
       repository: props.repository,
       oauthToken: secret.secretValueFromJson("GithubOauthToken").unsafeUnwrap(),
-      basicAuthConfig: {
-        enableBasicAuth: true,
-        password: props.basicAuthPassword,
-        username: props.username,
-      },
+      // basicAuthConfig: {
+      //   enableBasicAuth: true,
+      //   password: props.basicAuthPassword,
+      //   username: props.username,
+      // },
       environmentVariables: [
         // {
         //   name: "AMPLIFY_MONOREPO_APP_ROOT",
