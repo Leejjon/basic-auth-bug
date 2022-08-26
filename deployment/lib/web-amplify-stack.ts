@@ -19,6 +19,7 @@ export interface AmplifyStackProps extends StackProps {
   repository: string;
   branchName: string;
   basicAuthPassword: string;
+  domains: string[];
 }
 
 export class WebAmplifyStack extends Stack {
@@ -26,7 +27,7 @@ export class WebAmplifyStack extends Stack {
     super(scope, id, props);
 
     const secret = secretsmanager.Secret.fromSecretAttributes(this, "Secret", {
-      secretPartialArn: `arn:aws:secretsmanager:eu-central-1:039085306114:secret:css-secrets-3eVZL2`,
+      secretPartialArn: `arn:aws:secretsmanager:eu-central-1:039085306114:secret:css-secrets-zExjBy`,
     });
 
     const amplifyRole = new iam.Role(this, "AmplifyRole", {
@@ -166,11 +167,25 @@ export class WebAmplifyStack extends Stack {
       ],
     });
 
-    new amplify.CfnBranch(this, "AmplifyBranch", {
+    let cfnBranch = new amplify.CfnBranch(this, "AmplifyBranch", {
       appId: amplifyApp.attrAppId,
       branchName: props.branchName,
       stage: "PRODUCTION",
       enableAutoBuild: true,
     });
+
+    props.domains.map((item, index) => {
+      new amplify.CfnDomain(this, `AmplifyDomain${index + 1}`, {
+        appId: amplifyApp.attrAppId,
+        domainName: item,
+        enableAutoSubDomain: false,
+        subDomainSettings: [
+          {
+            branchName: props.branchName,
+            prefix: ""
+          }
+        ]
+      }).addDependsOn(cfnBranch);
+    })
   }
 }

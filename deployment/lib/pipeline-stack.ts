@@ -6,6 +6,7 @@ import { WebAmplifyStack } from "./web-amplify-stack";
 export interface AmplifyStageProps extends StageProps {
   branchName: string;
   stageName: string;
+  domains: string[];
 }
 
 export class AmplifyStage extends Stage {
@@ -22,6 +23,7 @@ export class AmplifyStage extends Stage {
       repository: repository,
       username: "hello",
       basicAuthPassword: "awssupport",
+      domains: props.domains
     });
   }
 }
@@ -58,6 +60,10 @@ export class PipelineStack extends Stack {
       new AmplifyStage(this, "NonProd", {
         branchName: props.branchName,
         stageName: "DEVELOPMENT",
+        domains: [
+            "pretopstelling.nl",
+            "opstelling.app"
+        ]
       }),
     );
   }
