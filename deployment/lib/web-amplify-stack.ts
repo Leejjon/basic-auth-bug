@@ -26,7 +26,7 @@ export class WebAmplifyStack extends Stack {
     super(scope, id, props);
 
     const secret = secretsmanager.Secret.fromSecretAttributes(this, "Secret", {
-      secretPartialArn: `arn:aws:secretsmanager:eu-central-1:039085306114:secret:css-secrets-3eVZL2`,
+      secretPartialArn: `arn:aws:secretsmanager:eu-central-1:039085306114:secret:css-secrets2-wd5eOg`,
     });
 
     const amplifyRole = new iam.Role(this, "AmplifyRole", {
