@@ -140,17 +140,19 @@ export class WebAmplifyStack extends Stack {
       },
     });
 
+    const pastDate = new Date('2016-09-01T09:50:54.619Z');
+    const now = new Date();
     const amplifyApp = new amplify.CfnApp(this, "AmplifyApp", {
       name: props.appName,
       description: props.appDescription,
       iamServiceRole: amplifyRole.roleArn,
       repository: props.repository,
       oauthToken: secret.secretValueFromJson("GithubOauthToken").unsafeUnwrap(),
-      basicAuthConfig: {
+      basicAuthConfig: pastDate > now ? {
         enableBasicAuth: true,
         password: props.basicAuthPassword,
         username: props.username,
-      },
+      } : undefined,
       environmentVariables: [
         // {
         //   name: "AMPLIFY_MONOREPO_APP_ROOT",
@@ -162,7 +164,7 @@ export class WebAmplifyStack extends Stack {
           name: "_LIVE_UPDATES",
           value:
             '[{"name":"Next.js version","pkg":"next-version","type":"internal","version":"11"}]',
-        },
+        }
       ],
     });
 
