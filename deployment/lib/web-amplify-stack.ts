@@ -175,7 +175,7 @@ export class WebAmplifyStack extends Stack {
     });
 
     props.domains.map((item, index) => {
-      new amplify.CfnDomain(this, `AmplifyDomain${index + 1}`, {
+      new amplify.CfnDomain(this, item.replace(/\./g, ""), {
         appId: amplifyApp.attrAppId,
         domainName: item,
         enableAutoSubDomain: false,
