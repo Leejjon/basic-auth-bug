@@ -10,6 +10,6 @@ new PipelineStack(app, "basic-auth-bug-pipeline", {
         "arn:aws:codestar-connections:eu-central-1:039085306114:connection/010d9616-2ce5-4d82-a61d-75938f7b0deb",
     pipelineName: "basic-auth-bug-pipeline",
     repositoryName: "leejjon/basic-auth-bug",
-    branchName: "addcdk",
+    branchName: "above2420",
     accountId: "",
 });
