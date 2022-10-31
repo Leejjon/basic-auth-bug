@@ -9,7 +9,7 @@ Requirements:
 To run this thing.
 
 - Fork this project on github
-- Clone it locally and checkout to the "addcdk" branch
+- Clone it locally and checkout to the "above2420" branch
 - Create a codestar connection in your aws account: https://docs.aws.amazon.com/dtconsole/latest/userguide/connections-create-github.html
 - Copy and paste the arn of this codestar connection in line 10 of the deployment.ts
 - Create a secret in the secret manager of type other. Enter the key "GithubOauthToken" and value an Personal access token that you need to make on github (Developer Settings -> Personal access tokens)
@@ -21,9 +21,4 @@ To run this thing.
 - I also ran this command but I'm not sure if it was needed: cdk bootstrap aws://accountid/region
 - cdk deploy
 - Verify that there is a "basic-auth-bug-pipeline" cloudformation template
-- Verify that this pipeline runs once and creates the amplify app
-- Go to the amplify app and click on the "run build" button
-- Usually the first time the deployments works.
-- Try changing something like the app description in the pipeline-stack.ts to trigger a cloudformation update. And commit this change and push it. It should trigger the amplify build.
-- And you can trigger the codepipeline to update the infra (after the amplify build succeeds).
-- It breaks. Try logging in to your amplify url with username "hello" and password "awssupport"
+

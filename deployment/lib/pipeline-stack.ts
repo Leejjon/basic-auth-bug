@@ -57,7 +57,7 @@ export class PipelineStack extends Stack {
     pipeline.addStage(
       new AmplifyStage(this, "NonProd", {
         branchName: props.branchName,
-        stageName: "DEVELOPMENT",
+        stageName: "NonProd",
       }),
     );
   }
